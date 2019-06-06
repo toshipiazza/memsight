@@ -1,3 +1,8 @@
+def _max(m):
+    # filter all None's out before max'ing
+    return max(list(filter(lambda i: i is not None, m)))
+
+
 class Node(object):
     def __init__(self, interval, mmax, parent):
         self.interval = interval
@@ -55,10 +60,10 @@ class Node(object):
         z.right_depth = 1 + max(self.left_depth, self.right_depth)
         lm = self.left_child.max  if self.left_child  is not None else None
         rm = self.right_child.max if self.right_child is not None else None
-        self.max = max(self.interval.end, lm, rm)
+        self.max = _max((self.interval.end, lm, rm))
         lm = z.left_child.max  if z.left_child  is not None else None
         rm = z.right_child.max if z.right_child is not None else None
-        z.max = max(z.interval.end, lm, rm) # max(None, *) is always *
+        z.max = _max((z.interval.end, lm, rm))
 
     def rotationLeft(self):
         z = self.right_child
@@ -79,10 +84,10 @@ class Node(object):
         z.left_depth = 1 + max(self.left_depth, self.right_depth)
         lm = self.left_child.max  if self.left_child  is not None else None
         rm = self.right_child.max if self.right_child is not None else None
-        self.max = max(self.interval.end, lm, rm)
+        self.max = _max((self.interval.end, lm, rm))
         lm = z.left_child.max  if z.left_child  is not None else None
         rm = z.right_child.max if z.right_child is not None else None
-        z.max = max(z.interval.end, lm, rm) # max(None, *) is always *
+        z.max = _max((z.interval.end, lm, rm))
 
     # complexity is O(min(n, k log(n)) where k is the number of overlapping intervals
     def search(self, interval, ris):

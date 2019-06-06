@@ -17,7 +17,7 @@ def do_start(state):
 	buf_size = 32
 	buf = claripy.BVS('buffer', buf_size * 8)
 	buf = claripy.Concat(buf, claripy.BVV(0x0, 8))
-	state.memory.store(0xABCD, buf, len(buf) / 8)
+	state.memory.store(0xABCD, buf, len(buf) // 8)
 	
 	state.stack_push(92) # "\"
 	state.stack_push(0x0)

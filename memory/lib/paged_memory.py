@@ -29,7 +29,7 @@ class PagedMemory(object):
         self.memory = memory
 
     def _get_index_offset(self, addr):
-        index = addr / self.PAGE_SIZE
+        index = addr // self.PAGE_SIZE
         offset = addr % self.PAGE_SIZE
         return index, offset
 

@@ -24,7 +24,7 @@ class Interval(object):
         return not self.__eq__(other)
 
     def __hash__(self):
-        return hash((self.begin, self.end, self.data))
+        return hash((self.begin, self.end))
 
     def __str__(self):
         return "[" + str(self.begin) + ", " + str(self.end) + "] " + str(self.data)
